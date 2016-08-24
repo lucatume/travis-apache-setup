@@ -49,3 +49,6 @@ cp -f $scriptDir/assets/travis-ci-apache /etc/apache2/sites-available/default
 sed -e "s?%DIR%?$dir?g" --in-place /etc/apache2/sites-available/default
 sed -e "s?%URL%?$url?g" --in-place /etc/apache2/sites-available/default
 echo "$host $url" | sudo tee --append /etc/hosts > /dev/null
+
+# Restart services
+service apache2 restart
