@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ $EUID -ne 0 ]]; then
-  echo "This script requires root access, run it as sudo" 2>&1
-  exit 1
-fi
-
 siteDir="/tmp/site"
 siteUrl="http://site.dev"
 siteHost="127.0.0.1";
