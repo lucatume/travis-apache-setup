@@ -12,7 +12,7 @@ while getopts "fuh:" opt; do
         ;;
     u)  siteUrl=$OPTARG
         ;;
-    h)  host=$OPTARG
+    h)  siteHost=$OPTARG
         ;;
     esac
 done
