@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 siteDir="/tmp/site"
 siteUrl="http://site.dev"
