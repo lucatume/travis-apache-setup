@@ -37,7 +37,7 @@ a2enmod headers
 
 echo "Enabling php-fpm"
 # credit: https://www.marcus-povey.co.uk/2016/02/16/travisci-with-php-7-on-apache-php-fpm/
-if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then sudo cp $scriptDir/assets/www.conf ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/; fi
+if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then cp $scriptDir/assets/www.conf ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/; fi
 cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
 a2enmod rewrite actions fastcgi alias
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
@@ -47,7 +47,7 @@ echo "Configuring Apache virtual hosts"
 cp -f $scriptDir/assets/travis-ci-apache /etc/apache2/sites-available/default
 sed -e "s?%DIR%?$siteDir?g" --in-place /etc/apache2/sites-available/default
 sed -e "s?%URL%?$siteUrl?g" --in-place /etc/apache2/sites-available/default
-echo "$siteHost $siteUrl" | sudo tee --append /etc/hosts > /dev/null
+echo "$siteHost $siteUrl" | tee --append /etc/hosts > /dev/null
 
 echo "Restarting Apache"
 service apache2 restart
