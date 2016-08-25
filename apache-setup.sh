@@ -24,10 +24,7 @@ printf $BREATH
 echo "Site from $SITE_DIR will be served on $SITE_URL (resolving domain name to $SITE_HOST address)"
 printf $SEP
 
-shsiteHost
-siteHost
-siteHost
-siteHostift $((OPTIND-1))
+shift $((OPTIND-1))
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
