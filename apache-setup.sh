@@ -26,11 +26,11 @@ printf $sep
 shift $((OPTIND-1))
 
 pushd `dirname $0` > /dev/null
-script`pwd -P`
+scriptDir=`pwd -P`
 popd > /dev/null
-scriptDir="`dirname "$script"`"
 
 printf $breath
+echo "Script executing from path $scriptDir"
 echo "Updating and installing apache2 packages"
 printf $sep
 
