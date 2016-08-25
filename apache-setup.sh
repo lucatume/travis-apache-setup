@@ -1,5 +1,3 @@
-#!/bin/bash
-
 siteDir="/tmp/site"
 siteUrl="http://site.dev"
 siteHost="127.0.0.1";
@@ -20,9 +18,7 @@ done
 breath="\n\n"
 sep="================================================================================\n"
 
-printf $breath
 echo "Site from $siteDir will be served on $siteUrl (resolving domain name to $siteHost address)"
-printf $sep
 
 shift $((OPTIND-1))
 
