@@ -26,9 +26,7 @@ printf $sep
 
 shift $((OPTIND-1))
 
-pushd `dirname $0` > /dev/null
-scriptDir=`pwd -P`
-popd > /dev/null
+scriptDir="$(dirname "$(readlink -f "$0")")"
 
 echo "Script executing from path $scriptDir"
 printf $breath
