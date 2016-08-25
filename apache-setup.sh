@@ -18,7 +18,7 @@ while getopts "f:u:h:" opt; do
 done
 
 breath="\n\n"
-sep="\n================================================================================\n"
+sep="================================================================================\n"
 
 printf $breath
 echo "Site from $siteDir will be served on $siteUrl (resolving domain name to $siteHost address)"
