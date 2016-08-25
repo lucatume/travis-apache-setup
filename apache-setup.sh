@@ -20,6 +20,7 @@ done
 breath="\n\n"
 sep="================================================================================\n"
 
+printf $breath
 echo "Site from $siteDir will be served on $siteUrl (resolving domain name to $siteHost address)"
 printf $sep
 
@@ -29,8 +30,8 @@ pushd `dirname $0` > /dev/null
 scriptDir=`pwd -P`
 popd > /dev/null
 
-printf $breath
 echo "Script executing from path $scriptDir"
+printf $breath
 echo "Updating and installing apache2 packages"
 printf $sep
 
