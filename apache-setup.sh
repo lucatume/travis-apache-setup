@@ -1,3 +1,5 @@
+#!/bin/bash
+
 siteDir="/tmp/site"
 siteUrl="http://site.dev"
 siteHost="127.0.0.1";
