@@ -19,10 +19,13 @@ breath="\n\n"
 sep="================================================================================\n"
 
 echo "Site from $siteDir will be served on $siteUrl (resolving domain name to $siteHost address)"
+printf $sep
 
 shift $((OPTIND-1))
 
-script="`readlink -f "${BASH_SOURCE[0]}"`"
+pushd `dirname $0` > /dev/null
+script`pwd -P`
+popd > /dev/null
 scriptDir="`dirname "$script"`"
 
 printf $breath
