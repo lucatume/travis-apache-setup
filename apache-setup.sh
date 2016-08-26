@@ -2,7 +2,7 @@
 
 SITE_DIR="/tmp/site"
 SITE_URL="http://site.dev"
-SITE_HOST="127.0.0.1";
+SITE_HOST="127.0.0.1"
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
@@ -17,14 +17,11 @@ while getopts "f:u:h:" opt; do
     esac
 done
 
+shift $((OPTIND-1))
+
+
 BREATH="\n\n"
 SEP="================================================================================\n"
-
-printf $BREATH
-echo "Site from $SITE_DIR will be served on $SITE_URL (resolving domain name to $SITE_HOST address)"
-printf $SEP
-
-shift $((OPTIND-1))
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -58,6 +55,7 @@ echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php
 printf $BREATH
 echo "Configuring Apache virtual hosts"
 printf $SEP
+echo "Apache default virtual host configuration will be overwritten to serve $SITE_URL from $SITE_DIR"
 
 cp -f $SCRIPT_DIR/assets/travis-ci-apache /etc/apache2/sites-available/default
 sed -e "s?%DIR%?$SITE_DIR?g" --in-place /etc/apache2/sites-available/default
