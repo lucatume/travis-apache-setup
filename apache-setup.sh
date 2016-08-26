@@ -45,6 +45,7 @@ printf $BREATH
 echo "Enabling php-fpm"
 printf $SEP
 
+if [[ ${TRAVIS_PHP_VERSION:0:3} != "7.0" ]]; then groupadd nobody; fi
 # credit: https://www.marcus-povey.co.uk/2016/02/16/travisci-with-php-7-on-apache-php-fpm/
 if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then cp $SCRIPT_DIR/assets/www.conf ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/; fi
 cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
