@@ -5,6 +5,7 @@ DEBUG=1
 # defaults
 WP_DIR="/tmp/wordpress"
 WP_MULTISITE=0
+WP_MUSUBDOMAINS=0
 WP_DBNAME="wordpress"
 WP_DBUSER="root"
 WP_DBPASS=""
@@ -19,7 +20,7 @@ WP_ADMIN_EMAIL="admin@$WP_DOMAIN"
 EMPTY=1
 WP_THEME="twentysixteen"
 
-PARSED_OPTIONS=$(getopt -n "$0"  -o 'me' --long "dir::,multisite,empty,dbname::,dbuser::,dbpass::,dbhost::,dbprefix::,domain::,title::,base::,admin_user::,admin_password::,admin_email::,theme::"  -- "$@")
+PARSED_OPTIONS=$(getopt -n "$0"  -o 'me' --long "dir::,multisite,subdomains,empty,dbname::,dbuser::,dbpass::,dbhost::,dbprefix::,domain::,title::,base::,admin_user::,admin_password::,admin_email::,theme::"  -- "$@")
  
 #Bad arguments, something has gone wrong with the getopt command.
 if [ $? -ne 0 ];
@@ -38,6 +39,7 @@ while true ; do
     case "$1" in
         --dir ) WP_DIR="$2"; shift 2;;
         -m|--multisite ) WP_MULTISITE=1; shift;;
+        -s|--subdomains ) WP_MUSUBDOMAINS=1; shift;;
         -e|--empty ) EMPTY=1; shift;;
         --dbname ) WP_DBNAME="$2"; shift 2;;
         --dbuser ) WP_DBUSER="$2"; shift 2;;
@@ -57,7 +59,8 @@ done
 
 if [[ $DEBUG == 1 ]]; then
     echo "WP_DIR is $WP_DIR" 
-    echo "WP_MULTISITE is $WP_MULTISITE" 
+    echo "WP_MULTISITE is $WP_MULTISITE"
+    echo "WP_MUSUBDOMAINS is $WP_MUSUBDOMAINS"
     echo "WP_DBNAME is $WP_DBNAME" 
     echo "WP_DBUSER is $WP_DBUSER" 
     echo "WP_DBPASS is $WP_DBPASS" 
@@ -105,7 +108,7 @@ if [[ $WP_MULTISITE == 1 ]]; then
 elif [[ $WP_MULTISITE == 0 ]]; then
     echo "Configuring WordPress for single site installation"
     wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
-    wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL if [[ $WP_MUSUBDOMAINS == 1 ]]; then "--subdomains" ;fi; --skip-email
+    wp core install --url=$WP_DOMAIN --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --skip-email
 fi
 
 printf $SEP
