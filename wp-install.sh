@@ -96,11 +96,11 @@ echo "Downloading WordPress"
 cd $WP_DIR && wp core download
 
 printf $BREATH
-if [[ WP_MULTISITE == 1 ]]; then
+if [[ $WP_MULTISITE == 1 ]]; then
     echo "Configuring WordPress for multisite installation"
     wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
     wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL if [[ $WP_MUSUBDOMAINS == 1 ]]; then "--subdomains" ;fi; --skip-email
-elif [[ WP_MULTISITE == 0 ]]; then
+elif [[ $WP_MULTISITE == 0 ]]; then
     echo "Configuring WordPress for single site installation"
     wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
     wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL if [[ $WP_MUSUBDOMAINS == 1 ]]; then "--subdomains" ;fi; --skip-email
