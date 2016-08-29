@@ -71,8 +71,6 @@ if [[ $DEBUG == 1 ]]; then
     echo "WP_ADMIN_EMAIL is $WP_ADMIN_EMAIL" 
     echo "EMPTY is $EMPTY" 
     echo "WP_THEME is $WP_THEME" 
-
-    exit 0;
 fi
 
 BREATH="\n\n"
