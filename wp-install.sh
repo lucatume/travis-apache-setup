@@ -85,6 +85,7 @@ mkdir -p WP_DIR$
 
 printf $BREATH
 echo "Installing wp-cli; will be globally available as wp"
+printf $SEP
 # install wp-cli and make it available in PATH
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
 chmod +x /tmp/tools/wp-cli.phar && mv /tmp/tools/wp-cli.phar /tmp/tools/wp
@@ -92,6 +93,7 @@ export PATH=$PATH:/tmp/tools:vendor/bin
 
 printf $BREATH
 echo "Downloading WordPress"
+printf $SEP
 # download wordpress
 cd $WP_DIR && wp core download
 
@@ -106,9 +108,12 @@ elif [[ $WP_MULTISITE == 0 ]]; then
     wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL if [[ $WP_MUSUBDOMAINS == 1 ]]; then "--subdomains" ;fi; --skip-email
 fi
 
+printf $SEP
+
 if [[ $EMPTY == 1 ]]; then
     printf $BREATH
     echo "Emptying WordPress installation"
+    printf $SEP
     wp site empty --yes
     wp plugin delete $(wp plugin list --field=name)
     wp theme activate $WP_THEME && wp theme delete $(wp theme list --field=name --status=inactive)
