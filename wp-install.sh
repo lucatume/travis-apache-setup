@@ -87,7 +87,7 @@ mkdir -p WP_DIR$
 
 
 printf $BREATH
-echo "Installing wp-cli; will be globally available as 'wp'"
+echo "Installing wp-cli; will be globally available as wp"
 printf $SEP
 # install wp-cli and make it available in PATH
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
