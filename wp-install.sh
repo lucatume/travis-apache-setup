@@ -30,10 +30,6 @@ fi
  
 eval set -- "$PARSED_OPTIONS"
 
-if [[ $DEBUG == 1 ]]; then
-    echo "$PARSED_OPTIONS"
-fi
-
 # extract options and their arguments into variables.
 while true ; do
     case "$1" in
@@ -74,7 +70,7 @@ if [[ $DEBUG == 1 ]]; then
     echo "WordPress domain is $WP_DOMAIN" 
     echo "WordPress title is $WP_TITLE" 
     echo "WordPress admin user is $WP_ADMIN_USER, with password $WP_ADMIN_PASS and email $WP_ADMIN_EMAIL" 
-    echo "Active theme will be $WP_THEME" 
+    echo "Active theme will be is $WP_THEME" 
     if [[ $EMPTY ==1 ]]; then
         "WordPress Installation will be emptied"
     fi
@@ -91,7 +87,7 @@ mkdir -p WP_DIR$
 
 
 printf $BREATH
-echo "Installing wp-cli; will be globally available as wp"
+echo "Installing wp-cli; will be globally available as 'wp'"
 printf $SEP
 # install wp-cli and make it available in PATH
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/

@@ -1,24 +1,29 @@
 #!/bin/bash
 
+# defaults
 SITE_DIR="/tmp/site"
 SITE_URL="http://site.dev"
 SITE_HOST="127.0.0.1"
 
-OPTIND=1         # Reset in case getopts has been used previously in the shell.
+PARSED_OPTIONS=$(getopt -n "$0"  -o 'd::,u::,h::' --long "dir::,url::,host::"  -- "$@")
+ 
+#Bad arguments, something has gone wrong with the getopt command.
+if [ $? -ne 0 ];
+then
+  exit 1
+fi
+ 
+eval set -- "$PARSED_OPTIONS"
 
-while getopts "f:u:h:" opt; do
-    case "$opt" in
-    f)  SITE_DIR=$OPTARG
-        ;;
-    u)  SITE_URL=$OPTARG
-        ;;
-    h)  SITE_HOST=$OPTARG
-        ;;
+# extract options and their arguments into variables.
+while true ; do
+    case "$1" in
+        -d|--dir ) SITE_DIR="$2"; shift 2;;
+        -u|--url ) SITE_URL="$2"; shift 2;;
+        -h|--host ) SITE_HOST="$2"; shift 2;;
+        --) shift; break;;
     esac
 done
-
-shift $((OPTIND-1))
-
 
 BREATH="\n\n"
 SEP="================================================================================\n"
