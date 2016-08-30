@@ -70,7 +70,7 @@ if [[ $DEBUG == 1 ]]; then
     echo "WordPress domain is $WP_DOMAIN" 
     echo "WordPress title is $WP_TITLE" 
     echo "WordPress admin user is $WP_ADMIN_USER, with password $WP_ADMIN_PASS and email $WP_ADMIN_EMAIL" 
-    echo "Active theme will be is $WP_THEME" 
+    echo "Active theme will is $WP_THEME" 
     if [[ $EMPTY == 1 ]]; then
         "WordPress Installation will be emptied"
     fi
