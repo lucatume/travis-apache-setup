@@ -58,22 +58,26 @@ while true ; do
 done
 
 if [[ $DEBUG == 1 ]]; then
-    echo "WP_DIR is $WP_DIR" 
-    echo "WP_MULTISITE is $WP_MULTISITE"
-    echo "WP_MUSUBDOMAINS is $WP_MUSUBDOMAINS"
-    echo "WP_DBNAME is $WP_DBNAME" 
-    echo "WP_DBUSER is $WP_DBUSER" 
-    echo "WP_DBPASS is $WP_DBPASS" 
-    echo "WP_DBHOST is $WP_DBHOST" 
-    echo "WP_DBPREFIX is $WP_DBPREFIX" 
-    echo "WP_DOMAIN is $WP_DOMAIN" 
-    echo "WP_MUBASE is $WP_MUBASE" 
-    echo "WP_TITLE is $WP_TITLE" 
-    echo "WP_ADMIN_USER is $WP_ADMIN_USER" 
-    echo "WP_ADMIN_PASS is $WP_ADMIN_PASS" 
-    echo "WP_ADMIN_EMAIL is $WP_ADMIN_EMAIL" 
-    echo "EMPTY is $EMPTY" 
-    echo "WP_THEME is $WP_THEME" 
+    echo "WordPress will be installed in$WP_DIR (WP_DIR)" 
+    if [[ $WP_MULTISITE == 1 ]]; then
+        if [[ $WP_MUSUBDOMAINS == 1 ]]; then
+            echo "Multisite is enabled with sub-domains, base path is $WP_MUBASE"
+        elif [[ $WP_MUSUBDOMAINS == 0 ]]; then
+            echo "Multisite is enabled with sub-folders, base path is $WP_MUBASE"
+        fi
+    fi
+    echo "Database name is $WP_DBNAME" 
+    echo "Database user is $WP_DBUSER" 
+    echo "Database password is $WP_DBPASS" 
+    echo "Database host is $WP_DBHOST" 
+    echo "WordPress database prefix is $WP_DBPREFIX" 
+    echo "WordPress domain is $WP_DOMAIN" 
+    echo "WordPress title is $WP_TITLE" 
+    echo "WordPress admin user is $WP_ADMIN_USER, with password $WP_ADMIN_PASS and email $WP_ADMIN_EMAIL" 
+    echo "Active theme will be $WP_THEME" 
+    if [[ $EMPTY ==1 ]]; then
+        "WordPress Installation will be emptied"
+    fi
 fi
 
 BREATH="\n\n"
@@ -104,7 +108,7 @@ printf $BREATH
 if [[ $WP_MULTISITE == 1 ]]; then
     echo "Configuring WordPress for multisite installation"
     wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
-    
+
     if [[ $WP_MUSUBDOMAINS == 1 ]]; then
         wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --subdomains --skip-email
     elif [[ $WP_MUSUBDOMAINS == 0 ]]; then
