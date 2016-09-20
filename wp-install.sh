@@ -18,7 +18,7 @@ WP_TITLE="Test"
 WP_ADMIN_USER="admin"
 WP_ADMIN_PASS="admin"
 WP_ADMIN_EMAIL="admin@$WP_DOMAIN"
-EMPTY=1
+EMPTY=0
 WP_THEME="twentysixteen"
 
 PARSED_OPTIONS=$(getopt -n "$0"  -o 'me' --long "dir::,version::,multisite,subdomains,empty,dbname::,dbuser::,dbpass::,dbhost::,dbprefix::,domain::,title::,base::,admin_user::,admin_password::,admin_email::,theme::"  -- "$@")
