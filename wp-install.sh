@@ -100,7 +100,7 @@ printf $BREATH
 echo "Downloading WordPress"
 printf $SEP
 # download wordpress
-cd $WP_DIR && wp core download
+cd $WP_DIR && wp core download --version=$WP_VERSION
 
 printf $BREATH
 if [[ $WP_MULTISITE == 1 ]]; then
