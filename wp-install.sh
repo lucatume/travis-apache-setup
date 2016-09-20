@@ -3,6 +3,7 @@
 DEBUG=1
 
 # defaults
+WP_VERSION="latest"
 WP_DIR="/tmp/wordpress"
 WP_MULTISITE=0
 WP_MUSUBDOMAINS=0
@@ -20,7 +21,7 @@ WP_ADMIN_EMAIL="admin@$WP_DOMAIN"
 EMPTY=1
 WP_THEME="twentysixteen"
 
-PARSED_OPTIONS=$(getopt -n "$0"  -o 'me' --long "dir::,multisite,subdomains,empty,dbname::,dbuser::,dbpass::,dbhost::,dbprefix::,domain::,title::,base::,admin_user::,admin_password::,admin_email::,theme::"  -- "$@")
+PARSED_OPTIONS=$(getopt -n "$0"  -o 'me' --long "dir::,version::,multisite,subdomains,empty,dbname::,dbuser::,dbpass::,dbhost::,dbprefix::,domain::,title::,base::,admin_user::,admin_password::,admin_email::,theme::"  -- "$@")
  
 #Bad arguments, something has gone wrong with the getopt command.
 if [ $? -ne 0 ];
@@ -34,6 +35,7 @@ eval set -- "$PARSED_OPTIONS"
 while true ; do
     case "$1" in
         --dir ) WP_DIR="$2"; shift 2;;
+        --version ) WP_VERSION="$2"; shift 2;;
         -m|--multisite ) WP_MULTISITE=1; shift;;
         -s|--subdomains ) WP_MUSUBDOMAINS=1; shift;;
         -e|--empty ) EMPTY=1; shift;;
@@ -87,7 +89,7 @@ mkdir -p WP_DIR$
 
 
 printf $BREATH
-echo "Installing wp-cli; will be globally available as wp"
+echo "Installing wp-cli"
 printf $SEP
 # install wp-cli and make it available in PATH
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
