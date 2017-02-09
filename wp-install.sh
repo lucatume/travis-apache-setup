@@ -85,7 +85,7 @@ SEP="===========================================================================
 # create the folder that will store the WordPress installation
 printf $BREATH
 echo "Creating folder $WP_DIR"
-mkdir -p WP_DIR$
+mkdir -p $WP_DIR
 
 
 printf $BREATH
