@@ -85,16 +85,15 @@ SEP="===========================================================================
 # create the folder that will store the WordPress installation
 printf $BREATH
 echo "Creating folder $WP_DIR"
-mkdir -p WP_DIR$
+mkdir -p $WP_DIR
 
 
 printf $BREATH
 echo "Installing wp-cli"
 printf $SEP
 # install wp-cli and make it available in PATH
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
-chmod +x /tmp/tools/wp-cli.phar && mv /tmp/tools/wp-cli.phar /tmp/tools/wp
-export PATH=$PATH:/tmp/tools:vendor/bin
+composer global require wp-cli/wp-cli --no-interaction
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 printf $BREATH
 echo "Downloading WordPress"
