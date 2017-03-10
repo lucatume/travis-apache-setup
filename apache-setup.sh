@@ -6,13 +6,13 @@ SITE_URL="http://site.dev"
 SITE_HOST="127.0.0.1"
 
 PARSED_OPTIONS=$(getopt -n "$0"  -o 'd::,u::,h::' --long "dir::,url::,host::"  -- "$@")
- 
+
 #Bad arguments, something has gone wrong with the getopt command.
 if [ $? -ne 0 ];
 then
   exit 1
 fi
- 
+
 eval set -- "$PARSED_OPTIONS"
 
 # extract options and their arguments into variables.
@@ -50,9 +50,9 @@ printf $BREATH
 echo "Enabling php-fpm"
 printf $SEP
 
-if [[ ${TRAVIS_PHP_VERSION:0:3} != "7.0" ]]; then groupadd nobody; fi
+if [[ ${TRAVIS_PHP_VERSION:0:1} == "5" ]]; then groupadd nobody; fi
 # credit: https://www.marcus-povey.co.uk/2016/02/16/travisci-with-php-7-on-apache-php-fpm/
-if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then cp $SCRIPT_DIR/assets/www.conf ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/; fi
+if [[ ${TRAVIS_PHP_VERSION:0:1} != "5" ]]; then cp $SCRIPT_DIR/assets/www.conf ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/; fi
 cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
 a2enmod rewrite actions fastcgi alias
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
