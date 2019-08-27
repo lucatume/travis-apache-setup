@@ -92,7 +92,7 @@ printf $BREATH
 echo "Installing wp-cli"
 printf $SEP
 # install wp-cli and make it available in PATH
-composer global require wp-cli/wp-cli --no-interaction
+composer global require wp-cli/wp-cli-bundle --no-interaction
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 printf $BREATH
@@ -104,7 +104,7 @@ cd $WP_DIR && wp core download --version=$WP_VERSION
 printf $BREATH
 if [[ $WP_MULTISITE == 1 ]]; then
     echo "Configuring WordPress for multisite installation"
-    wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
+    wp config create --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
 
     if [[ $WP_MUSUBDOMAINS == 1 ]]; then
         wp core multisite-install --url=$WP_DOMAIN --base=$WP_MUBASE --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --subdomains --skip-email
@@ -114,7 +114,7 @@ if [[ $WP_MULTISITE == 1 ]]; then
 
 elif [[ $WP_MULTISITE == 0 ]]; then
     echo "Configuring WordPress for single site installation"
-    wp core config --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
+    wp config create --dbname=$WP_DBNAME --dbuser=$WP_DBUSER --dbpass=$WP_DBPASS --dbhost=$WP_DBHOST --dbprefix=$WP_DBPREFIX --skip-salts
     wp core install --url=$WP_DOMAIN --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_EMAIL --skip-email
 fi
 
